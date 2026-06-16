@@ -7,7 +7,6 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.core.security import hash_password
-from app.db.base import Base
 from app.models.enums import UserRole
 from app.models.user import User
 
@@ -20,7 +19,6 @@ def main() -> None:
     args = parser.parse_args()
 
     engine = create_engine(settings.database_url, future=True)
-    Base.metadata.create_all(bind=engine)
 
     with Session(engine) as db:
         exists = db.query(User).filter(User.email == args.email).first()

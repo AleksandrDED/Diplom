@@ -4,7 +4,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
-from app.db.base import Base
 from app.models.directory import EquipmentType, ProtectedObject
 
 OBJECTS = [
@@ -23,7 +22,6 @@ EQUIPMENT_TYPES = [
 
 def main() -> None:
     engine = create_engine(settings.database_url, future=True)
-    Base.metadata.create_all(bind=engine)
 
     with Session(engine) as db:
         for item in OBJECTS:

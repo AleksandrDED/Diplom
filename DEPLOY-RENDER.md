@@ -140,7 +140,17 @@ Render **сам пересоберёт** сервис после push в `main`.
 
 ---
 
-## Если что-то не работает
+## Если деплой падает с «Exited with status 1»
+
+1. Откройте **diplom-tco** → **Logs** (не Events) — там текст ошибки.
+2. Если база уже создавалась с ошибкой, **сбросьте PostgreSQL**:
+   - Render → **guard-db** → **Settings** → **Delete Database**
+   - Затем **Blueprint Diplom** → **Manual sync** (база создастся заново)
+3. **diplom-tco** → **Manual Deploy** → **Clear build cache & deploy**
+
+Частая причина: миграция под SQLite не подходила для PostgreSQL — в последних коммитах исправлено.
+
+---
 
 | Проблема | Решение |
 |----------|---------|
